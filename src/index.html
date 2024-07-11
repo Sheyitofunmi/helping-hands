@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Helping Hands</title>
+    <meta
+      name="description"
+      content="A little library that can be used for creating WebGL powered distortion hover effects using displacement images."
+    />
+    <meta
+      name="keywords"
+      content="webgl, hover, effect, distortion, displacement, web development, three.js"
+    />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+  </head>
+  <body class="loading">
+    <div class="grid">
+      <div class="grid__item grid__item--bg theme-7">
+        <div
+          class="grid__item-img"
+          data-displacement="./img/7.jpg"
+          data-intensity="0.9"
+          data-speedIn="0.8"
+          data-speedOut="0.4"
+          data-easing="Circ.easeOut"
+        >
+          <img src="./img/Img19.jpg" alt="Image" />
+          <img src="./img/Img20.jpg" alt="Image Alt" />
+        </div>
+        <div class="grid__item-content">
+          <span class="grid__item-meta">Inspiration</span>
+          <h2 class="grid__item-title">Keep Learning</h2>
+          <h3 class="grid__item-subtitle">
+            <span>Skills can open unexpected doors</span>
+            <a class="grid__item-link" href="#">Believe</a>
+          </h3>
+        </div>
+      </div>
+      <div class="grid__item theme-8">
+        <div class="grid__item-content">
+          <nav class="grid__item-nav">
+            <a href="#" class="grid__item-link">Learning Resources</a>
+            <a href="#" class="grid__item-link">Success Stories</a>
+            <a href="#" class="grid__item-link">Community</a>
+          </nav>
+          <h2 class="grid__item-title grid__item-title--small">Keep Helping</h2>
+          <p class="grid__item-text">
+            Sometimes, the skills you offer can open doors you never expected.
+            Keep learning and keep helping, and blessings may find you in
+            surprising places.
+          </p>
+          <a href="#" class="grid__item-link">Have Faith</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js//imagesloaded.pkgd.min.js" type="module"></script>
+    <script src="./js/three.min.js" type="module"></script>
+    <script src="./js/gsap.min.js" type="module"></script>
+    <script src="./js/hover-effect.umd.js" type="module"></script>
+    <script>
+      imagesLoaded(document.querySelectorAll("img"), () => {
+        document.body.classList.remove("loading");
+      });
+
+      Array.from(document.querySelectorAll(".grid__item-img")).forEach((el) => {
+        const imgs = Array.from(el.querySelectorAll("img"));
+        new hoverEffect({
+          parent: el,
+          intensity: el.dataset.intensity || undefined,
+          speedIn: el.dataset.speedin || undefined,
+          speedOut: el.dataset.speedout || undefined,
+          easing: el.dataset.easing || undefined,
+          hover: el.dataset.hover || undefined,
+          image1: imgs[0].getAttribute("src"),
+          image2: imgs[1].getAttribute("src"),
+          displacementImage: el.dataset.displacement,
+        });
+      });
+    </script>
+  </body>
+</html>
